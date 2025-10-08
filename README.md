@@ -136,7 +136,7 @@ The frontend will run on `http://localhost:5173`
 3. Build React components for product display
 4. Implement search and filter functionality
 5. Add authentication with Laravel Sanctum
-6. Create shopping cart functionality
+6. Create shopping cart functionality.
 
 ## 🤝 Contributing
 
