@@ -5,7 +5,7 @@ Build a functional e-commerce site with product listing, search, filters, and sh
 
 ---
 
-## 📋 Phase 1: Database & Backend Foundation (Start Here!)
+## 📋 Phase 1: Database & Backend Foundation (Start Here!) (DONE!)
 
 ### 1.1 Set Up Database
 **Goal:** Create a products table to store your shop items
@@ -43,7 +43,7 @@ php artisan migrate
 
 ---
 
-### 1.2 Create Sample Data (Seeder)
+### 1.2 Create Sample Data (Seeder) (DONE!)
 **Goal:** Populate your database with test products
 
 **What to learn:**
