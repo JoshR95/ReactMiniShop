@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ProductController;
 
 // Test route to verify API is working
 Route::get('/test', function () {
@@ -11,12 +12,9 @@ Route::get('/test', function () {
     ]);
 });
 
-// Product routes (to be implemented)
-// Route::get('/products', [ProductController::class, 'index']);
-// Route::get('/products/{id}', [ProductController::class, 'show']);
+// product routes
 
-// Authentication routes (to be implemented)
-// Route::post('/register', [AuthController::class, 'register']);
-// Route::post('/login', [AuthController::class, 'login']);
+// this gets the url path for products and When someone visits /api/products, it runa the index() method in the ProductController class
+Route::get('/products', [ProductController::class, 'index']);
 
-
+Route::get('/products/{id}', [ProductController::class, 'show']);
