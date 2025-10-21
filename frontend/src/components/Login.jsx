@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
-import './Login.css';
+import MainPage from "./MainPage";
+import './components_css/Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         
+        // check if the login credentials are correct
         if (email === 'test@test.com' && password === 'password') {
-            // Login successful - redirect to products
-            window.location.href = '/products';
+            // Login successful - change login state to true to allow for redirect
+            setIsLoggedIn(true);
         } else {
             setError('Invalid credentials');
         }
     };
+
+    // if log in passes and isLoggedIn state is true, redirect to the apps main page
+    if(isLoggedIn) {
+        return <MainPage />
+    }
 
     return (
         <div className="login-container">
