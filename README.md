@@ -77,6 +77,29 @@ npm run dev
 
 The frontend will run on `http://localhost:5173`
 
+## ⚙️ Environment Configuration
+
+### Frontend Environment Variables
+
+Create a `.env` file in the `frontend/` directory:
+
+```bash
+# Frontend environment variables
+REACT_APP_API_URL=http://localhost:8000
+```
+
+**Important Notes:**
+- The `.env` file is automatically ignored by Git for security
+- Each developer needs to create their own `.env` file
+- For production, change `REACT_APP_API_URL` to your production API URL
+
+### Backend Environment Variables
+
+The backend uses Laravel's `.env` file (already configured):
+- Database connection settings
+- Application key
+- API configuration
+
 ## 🎯 Features (Planned)
 
 - [ ] Product listing and display

@@ -1,10 +1,11 @@
 import React from 'react';
+import Products from './Products';
 
 const MainPage = () => {
     return (
         <div>
-            <h1>Main Page</h1>
-            <p>Welcome to the main page</p>
+            <h1>Welcome to the React mini shop</h1>
+            <Products /> 
         </div>
     );
 };
