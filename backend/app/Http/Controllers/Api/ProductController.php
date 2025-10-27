@@ -8,11 +8,23 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    // gets all products and is a public function so can be accessed by anyone
-    public function index(){
-        // this gets all info from the products table in the database and stores it in $products
-        $products = Product::all();
-        // this converts the php data to json so it can be used by the front end
+    // gets all products with pagination support
+    public function index(Request $request){
+        // Laravel's paginate() automatically handles pagination from query parameters
+        // If URL is /api/products?page=2, it gets page 2
+        // If URL is /api/products?page=1&per_page=12, it gets page 1 with 12 items
+        $perPage = $request->get('per_page', 12); // Default 12 items per page
+        $products = Product::paginate($perPage);
+        
+        // Laravel returns pagination data automatically:
+        // {
+        //   "data": [...products...],
+        //   "current_page": 1,
+        //   "last_page": 3,
+        //   "per_page": 12,
+        //   "total": 25,
+        //   ...
+        // }
         return response()->json($products);
     }
 

@@ -1,0 +1,102 @@
+/* Products Container */
+.products-container {
+    padding: 20px;
+}
+
+.products-container h1 {
+    margin: 0px 0px 10px 0px;
+    text-decoration: underline;
+}
+
+/* Page Info */
+.page-info {
+    margin: 10px 20px;
+    color: white;
+}
+
+/* Products Grid - 3 columns, gap between items */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Individual Product Card */
+.product-card {
+    border: 1px solid #ddd;
+    padding: 30px;
+    border-radius: 8px;
+    background: white;
+    transition: box-shadow 0.2s;
+}
+
+.product-card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.product-card h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.product-card p {
+    color: #333
+}
+
+.product-card p {
+    margin: 5px 0;
+}
+
+.product-price {
+    font-size: 1.2em;
+    color: red !important;
+}
+
+/* Pagination Controls */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    padding: 8px 16px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    cursor: pointer;
+    background: white;
+    color: #007bff;
+    transition: all 0.2s;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: #007bff;
+    color: white;
+}
+
+.pagination button.active {
+    background: #007bff;
+    color: white;
+}
+
+.pagination button:disabled {
+    background: #ccc;
+    color: #666;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination button.primary {
+    background: #007bff;
+    color: white;
+    border: none;
+}
+
+.pagination button.primary:disabled {
+    background: #ccc;
+}
+
