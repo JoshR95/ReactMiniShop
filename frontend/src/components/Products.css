@@ -8,6 +8,35 @@
     text-decoration: underline;
 }
 
+/* Search Input */
+
+.search-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 0 0 0;
+}
+
+.search-input {
+    display: block;
+    margin-left: auto;
+    margin-right: 20px;
+    width: 400px;
+    padding: 10px 15px;
+    margin: 10px 20px;
+    border: 2px solid grey;
+    background-color: white;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    border-color: #0080b3;
+    color: black;
+}
+
 /* Page Info */
 .page-info {
     margin: 10px 20px;

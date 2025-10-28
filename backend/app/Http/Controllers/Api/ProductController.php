@@ -10,11 +10,25 @@ class ProductController extends Controller
 {
     // gets all products with pagination support
     public function index(Request $request){
-        // Laravel's paginate() automatically handles pagination from query parameters
+
+        // creating a builder for the query, this does not run straight away
+        $query = Product::query();
+        
         // If URL is /api/products?page=2, it gets page 2
         // If URL is /api/products?page=1&per_page=12, it gets page 1 with 12 items
         $perPage = $request->get('per_page', 12); // Default 12 items per page
-        $products = Product::paginate($perPage);
+
+        // adding a search filter
+        if ($request->has('search')){
+            // only adds a filter if ?search is in the url
+            $searchTerm = $request->get('search');
+            // this is the search filter, it inserts what was added to the search bar into searchTerm and filter to only show items including this name
+            // like '%laptop%' means contains laptop anywhere in the name
+            $query->where('name', 'LIKE', '%' . $searchTerm . '%');
+        }
+
+        // now execute the query with pagination 
+        $products = $query->paginate($perPage);
         
         // Laravel returns pagination data automatically:
         // {
@@ -25,6 +39,7 @@ class ProductController extends Controller
         //   "total": 25,
         //   ...
         // }
+
         return response()->json($products);
     }
 

@@ -6,6 +6,7 @@ const Products = () => {
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1); // Track which page we're on
     const [pagination, setPagination] = useState({ total: 0, per_page: 9, last_page: 1 }); // Store pagination metadata
+    const [searchTerm, setSearchTerm] = useState(''); // Store what user types in search box
     const itemsPerPage = 9; // Show 12 items per page
 
     // we use useEffect so this re-fetches when currentPage changes
@@ -15,8 +16,14 @@ const Products = () => {
                 // we try to fetch the environmental variables from the .env, but also have a local host fallback
                 const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
                 
-                // LARAVEL PAGINATION: Add ?page=X to URL to get specific page
-                const url = `${apiUrl}/api/products?page=${currentPage}&per_page=${itemsPerPage}`;
+                // Build URL with pagination + search filter
+                let url = `${apiUrl}/api/products?page=${currentPage}&per_page=${itemsPerPage}`;
+                
+                // If user typed something in search box, add it to the URL
+                if (searchTerm) {
+                    url += `&search=${encodeURIComponent(searchTerm)}`;
+                }
+                
                 console.log('Fetching from:', url);
                 
                 // api request, wait for fetch before continuing 
@@ -45,9 +52,9 @@ const Products = () => {
             }
         };
 
-        // running the above function (re-runs whenever currentPage changes!)
+        // running the above function (re-runs whenever currentPage OR searchTerm changes!)
         fetchProducts();
-    }, [currentPage]); // ← Dependency array: re-fetch when currentPage changes
+    }, [currentPage, searchTerm]); // ← Dependency array: re-fetch when currentPage OR searchTerm changes
 
     // No need to slice! Laravel already sends us only the products for the current page
 
@@ -60,11 +67,26 @@ const Products = () => {
     return (
         <div className="products-container">
             <h1>Products</h1>
-            <p className="page-info">
-                Page {pagination.current_page} of {pagination.last_page} ({pagination.total} total products)
-            </p>
+            <div className="search-bar">
+                {/* Search Bar */}
+                <input 
+                    type="text"
+                    placeholder="Search products by name..."
+                    value={searchTerm}
+                    onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                        setCurrentPage(1); // Reset to page 1 when searching
+                    }}
+                    className="search-input"
+                />
+                
+                <p className="page-info">
+                    Page {pagination.current_page} of {pagination.last_page} ({pagination.total} total products)
+                </p>                
+            </div>
 
-            {/* Products Grid - 3 columns, 4 rows = 12 items per page */}
+
+            {/* Products Grid - we map through products and display an item with all its information for each database entry */}
             <div className="products-grid">
                 {products.map(product => (
                     <div key={product.id} className="product-card">
