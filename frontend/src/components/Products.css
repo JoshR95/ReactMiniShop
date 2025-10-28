@@ -8,12 +8,16 @@
     text-decoration: underline;
 }
 
-/* Search Input */
+/*
+//////////////////////////////////
+search
+//////////////////////////////////
+*/
 
 .search-bar{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin: 20px 0 0 0;
 }
 
@@ -37,7 +41,35 @@
     color: black;
 }
 
-/* Page Info */
+/* Category Select Dropdown */
+.category-select {
+    width: 200px;
+    padding: 10px 15px;
+    margin: 10px 20px;
+    border: 2px solid grey;
+    background-color: white;
+    color: grey;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.category-select:focus {
+    border-color: #0080b3;
+}
+
+.category-select:hover {
+    border-color: #0080b3;
+}
+
+/*
+//////////////////////////////////
+ Page info
+//////////////////////////////////
+*/
+
 .page-info {
     margin: 10px 20px;
     color: white;
@@ -82,7 +114,12 @@
     color: red !important;
 }
 
-/* Pagination Controls */
+/*
+//////////////////////////////////
+ Pagination Controls 
+//////////////////////////////////
+*/
+
 .pagination {
     display: flex;
     justify-content: center;

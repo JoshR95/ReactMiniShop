@@ -7,6 +7,7 @@ const Products = () => {
     const [currentPage, setCurrentPage] = useState(1); // Track which page we're on
     const [pagination, setPagination] = useState({ total: 0, per_page: 9, last_page: 1 }); // Store pagination metadata
     const [searchTerm, setSearchTerm] = useState(''); // Store what user types in search box
+    const [selectedCategory, setSelectedCategory] = useState('');
     const itemsPerPage = 9; // Show 12 items per page
 
     // we use useEffect so this re-fetches when currentPage changes
@@ -21,7 +22,13 @@ const Products = () => {
                 
                 // If user typed something in search box, add it to the URL
                 if (searchTerm) {
+                    // this appends the search word to the url when entered into the search bar
                     url += `&search=${encodeURIComponent(searchTerm)}`;
+                }
+                // if user selected a category, add it to the URL
+                if(selectedCategory){
+                    // this appends the category to the url when the category is selected
+                    url += `&category=${encodeURIComponent(selectedCategory)}`;
                 }
                 
                 console.log('Fetching from:', url);
@@ -54,9 +61,7 @@ const Products = () => {
 
         // running the above function (re-runs whenever currentPage OR searchTerm changes!)
         fetchProducts();
-    }, [currentPage, searchTerm]); // ← Dependency array: re-fetch when currentPage OR searchTerm changes
-
-    // No need to slice! Laravel already sends us only the products for the current page
+    }, [currentPage, searchTerm, selectedCategory]); // Dependency array: re-fetch when currentPage OR searchTerm changes
 
     // Function to change pages - triggers new API call
     const paginate = (pageNumber) => {
@@ -79,10 +84,27 @@ const Products = () => {
                     }}
                     className="search-input"
                 />
-                
-                <p className="page-info">
-                    Page {pagination.current_page} of {pagination.last_page} ({pagination.total} total products)
-                </p>                
+                <select
+                    // value is what changes state, is always set to all categories to begin with as its value is ''
+                    value = {selectedCategory}
+                    // listens for an onchange on the drop and take the event as a parameter
+                    onChange={(e) => {
+                        // sets state to the selected value/category
+                        setSelectedCategory(e.target.value);
+                        // sets page to number 1
+                        setCurrentPage(1);
+                    }}
+                    className="category-select"
+                >
+                    <option value="">All Categories</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Tools">Tools</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Home & Garden">Home & Garden</option>
+                </select>
+
+                         
             </div>
 
 
@@ -120,6 +142,9 @@ const Products = () => {
                 >
                     Next →
                 </button>
+                <p className="page-info">
+                    Page {pagination.current_page} of {pagination.last_page} ({pagination.total} total products)
+                </p>       
             </div>
         </div>
     );

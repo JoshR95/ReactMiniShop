@@ -18,13 +18,21 @@ class ProductController extends Controller
         // If URL is /api/products?page=1&per_page=12, it gets page 1 with 12 items
         $perPage = $request->get('per_page', 12); // Default 12 items per page
 
-        // adding a search filter
+        // search filter
         if ($request->has('search')){
             // only adds a filter if ?search is in the url
             $searchTerm = $request->get('search');
             // this is the search filter, it inserts what was added to the search bar into searchTerm and filter to only show items including this name
             // like '%laptop%' means contains laptop anywhere in the name
             $query->where('name', 'LIKE', '%' . $searchTerm . '%');
+        }
+
+        // category filter
+        if($request->has('category')){
+            // only adds a filter if ?category= is in the url
+            $category = $request->get('category');
+            // this filters products to only show the selected category
+            $query->where('category', $category);
         }
 
         // now execute the query with pagination 
