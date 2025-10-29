@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import './Products.css';
+import './components_css/Products.css';
+import Filters from './Filters';
 
 
 const Products = () => {
@@ -69,82 +70,78 @@ const Products = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+    // Handler functions for filters - these update state and reset to page 1
+    const handleSearchChange = (newSearchTerm) => {
+        setSearchTerm(newSearchTerm);
+        setCurrentPage(1); // Reset to page 1 when search changes
+    };
+
+    const handleCategoryChange = (newCategory) => {
+        setSelectedCategory(newCategory);
+        setCurrentPage(1); // Reset to page 1 when category changes
+    };
+
     return (
         <div className="products-container">
-            <h1>Products</h1>
-            <div className="search-bar">
-                {/* Search Bar */}
-                <input 
-                    type="text"
-                    placeholder="Search products by name..."
-                    value={searchTerm}
-                    onChange={(e) => {
-                        setSearchTerm(e.target.value);
-                        setCurrentPage(1); // Reset to page 1 when searching
-                    }}
-                    className="search-input"
+            
+            <div className='products-main-div'>
+                <h1 className='products-title'>Products</h1>
+
+                {/* Simple Pagination Controls */}
+                <div className="pagination">
+                    <button 
+                        className="primary"
+                        onClick={() => paginate(currentPage - 1)}
+                        disabled={currentPage === 1}
+                    >
+                        ← Previous
+                    </button>
+
+                    <span>
+                        Page {currentPage} / {pagination.last_page}
+                    </span>
+
+                    <button 
+                        className="primary"
+                        onClick={() => paginate(currentPage + 1)}
+                        disabled={currentPage === pagination.last_page}
+                    >
+                        Next →
+                    </button>
+                    <p className="page-info">
+                        Page {pagination.current_page} of {pagination.last_page} ({pagination.total} total products)
+                    </p>       
+                </div>
+            </div>
+            
+            {/* This div creates the two-column layout: sidebar on left, products on right */}
+            <div className="products-layout">
+                
+                {/* LEFT SIDE: Filters Sidebar - Now a separate component */}
+                <Filters 
+                    searchTerm={searchTerm}
+                    onSearchChange={handleSearchChange}
+                    selectedCategory={selectedCategory}
+                    onCategoryChange={handleCategoryChange}
                 />
-                <select
-                    // value is what changes state, is always set to all categories to begin with as its value is ''
-                    value = {selectedCategory}
-                    // listens for an onchange on the drop and take the event as a parameter
-                    onChange={(e) => {
-                        // sets state to the selected value/category
-                        setSelectedCategory(e.target.value);
-                        // sets page to number 1
-                        setCurrentPage(1);
-                    }}
-                    className="category-select"
-                >
-                    <option value="">All Categories</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Tools">Tools</option>
-                    <option value="Clothing">Clothing</option>
-                    <option value="Sports">Sports</option>
-                    <option value="Home & Garden">Home & Garden</option>
-                </select>
 
-                         
-            </div>
-
-
-            {/* Products Grid - we map through products and display an item with all its information for each database entry */}
-            <div className="products-grid">
-                {products.map(product => (
-                    <div key={product.id} className="product-card">
-                        <h3>{product.name}</h3>
-                        <p>{product.description}</p>
-                        <p className="product-price"><strong>${product.price}</strong></p>
-                        <p>Category: {product.category}</p>
-                        <p>Stock: {product.stock}</p>
+                {/* RIGHT SIDE: Products and Pagination */}
+                <main className="products-area">
+                    {/* Products Grid - we map through products and display an item with all its information for each database entry */}
+                    <div className="products-grid">
+                        {products.map(product => (
+                            <div key={product.id} className="product-card">
+                                <h3>{product.name}</h3>
+                                <p>{product.description}</p>
+                                <p className="product-price"><strong>${product.price}</strong></p>
+                                <p>Category: {product.category}</p>
+                                <p>Stock: {product.stock}</p>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
 
-            {/* Simple Pagination Controls */}
-            <div className="pagination">
-                <button 
-                    className="primary"
-                    onClick={() => paginate(currentPage - 1)}
-                    disabled={currentPage === 1}
-                >
-                    ← Previous
-                </button>
 
-                <span>
-                    Page {currentPage} / {pagination.last_page}
-                </span>
-
-                <button 
-                    className="primary"
-                    onClick={() => paginate(currentPage + 1)}
-                    disabled={currentPage === pagination.last_page}
-                >
-                    Next →
-                </button>
-                <p className="page-info">
-                    Page {pagination.current_page} of {pagination.last_page} ({pagination.total} total products)
-                </p>       
+                </main>
             </div>
         </div>
     );

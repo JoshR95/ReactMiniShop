@@ -1,67 +1,33 @@
 /* Products Container */
 .products-container {
-    padding: 20px;
+    padding: 0px 50px 50px 50px;
 }
 
-.products-container h1 {
-    margin: 0px 0px 10px 0px;
+.products-title {
+    text-align: left;
+    margin: 20px 0px 20px 0px;
+    font-size: 2.5rem;
     text-decoration: underline;
+    color: #6e6e73;
+}
+
+.products-main-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 /*
 //////////////////////////////////
-search
+Two-Column Layout (Sidebar + Products)
 //////////////////////////////////
 */
 
-.search-bar{
-    display: flex;
-    flex-direction: row;
-    /* justify-content: space-between; */
-    margin: 20px 0 0 0;
-}
-
-.search-input {
-    display: block;
-    margin-left: auto;
-    margin-right: 20px;
-    width: 400px;
-    padding: 10px 15px;
-    margin: 10px 20px;
-    border: 2px solid grey;
-    background-color: white;
-    border-radius: 4px;
-    font-size: 16px;
-    outline: none;
-    transition: border-color 0.3s;
-}
-
-.search-input:focus {
-    border-color: #0080b3;
-    color: black;
-}
-
-/* Category Select Dropdown */
-.category-select {
-    width: 200px;
-    padding: 10px 15px;
-    margin: 10px 20px;
-    border: 2px solid grey;
-    background-color: white;
-    color: grey;
-    border-radius: 4px;
-    font-size: 16px;
-    outline: none;
-    cursor: pointer;
-    transition: border-color 0.3s;
-}
-
-.category-select:focus {
-    border-color: #0080b3;
-}
-
-.category-select:hover {
-    border-color: #0080b3;
+/* This creates the two-column layout using CSS Grid */
+.products-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr; /* Left column fixed width (280px), right column takes remaining space */
+    gap: 30px; /* Space between sidebar and products */
 }
 
 /*
@@ -69,6 +35,7 @@ search
  Page info
 //////////////////////////////////
 */
+
 
 .page-info {
     margin: 10px 20px;
@@ -87,13 +54,14 @@ search
 .product-card {
     border: 1px solid #ddd;
     padding: 30px;
-    border-radius: 8px;
     background: white;
-    transition: box-shadow 0.2s;
+    border-radius: 18px;
+    box-shadow: 2px 4px 12px #00000014;
 }
 
 .product-card:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 2px 4px 16px #00000029;
+    transform: scale3d(1.01, 1.01, 1.01);
 }
 
 .product-card h3 {
@@ -131,38 +99,44 @@ search
 
 .pagination button {
     padding: 8px 16px;
-    border: 1px solid #007bff;
+    border: 1px solid #213038;
     border-radius: 4px;
     cursor: pointer;
     background: white;
-    color: #007bff;
+    color: #213038;
     transition: all 0.2s;
 }
 
 .pagination button:hover:not(:disabled) {
-    background: #007bff;
+    background: #213038;
     color: white;
 }
 
 .pagination button.active {
-    background: #007bff;
+    background: #213038;
     color: white;
 }
 
 .pagination button:disabled {
-    background: #ccc;
+    background: white;
     color: #666;
     border-color: #ccc;
     cursor: not-allowed;
 }
 
 .pagination button.primary {
-    background: #007bff;
+    background: #213038;
     color: white;
     border: none;
 }
 
 .pagination button.primary:disabled {
-    background: #ccc;
+    background: white;
+    color: black;
+    border-color: #666;
 }
 
+.page-info{
+    color: #213038;
+    font-size: 1.1rem;
+}

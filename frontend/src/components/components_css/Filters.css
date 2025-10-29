@@ -1,0 +1,79 @@
+/*
+//////////////////////////////////
+Filters Sidebar Component
+//////////////////////////////////
+*/
+
+.filters-sidebar {
+    background: white;
+    padding: 20px;
+    height: fit-content;
+    position: sticky; /* Stays in place when scrolling */
+    top: 20px;
+    margin-top: 20px;
+    height: 760px;
+    border-radius: 18px;
+    box-shadow: 2px 4px 12px #00000014;
+}
+
+.filters-sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    color: #333;
+}
+
+/* Each filter section (search, category, price, etc.) */
+.filter-section {
+    margin-bottom: 25px;
+}
+
+.filter-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #ddd;
+    background-color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.search-input:focus {
+    border-color: #0080b3;
+    color: black;
+}
+
+/* Category Select Dropdown */
+
+.category-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #ddd;
+    background-color: white;
+    color: #333;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.category-select:focus {
+    border-color: #0080b3;
+}
+
+.category-select:hover {
+    border-color: #0080b3;
+}
+
