@@ -12,20 +12,23 @@ header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
 .main-header h1{
     margin: 0;
-    padding: 50px;
+    padding: 40px 50px 40px 150px;
     font-size: 4em;
     line-height: 1.1;
     color: black;
+    text-align: left;
 }
+
 
 .header-logo{
     height: 200px;
     width: 200px;
-    padding-right: 50px;
+    padding-right: 150px;
 }
 
 /* 
