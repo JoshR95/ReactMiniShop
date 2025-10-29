@@ -7,7 +7,11 @@ const Filters = ({
     searchTerm, 
     onSearchChange, 
     selectedCategory, 
-    onCategoryChange 
+    onCategoryChange,
+    minPrice,
+    onMinPriceChange,
+    maxPrice,
+    onMaxPriceChange
 }) => {
     return (
         <aside className="filters-sidebar">
@@ -49,11 +53,38 @@ const Filters = ({
                     <option value="Home & Garden">Home & Garden</option>
                 </select>
             </div>
+            {/* Price Range Filter Section */}
+            <div className="filter-section">
+                <label htmlFor="price-range">Price Range</label>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                    <input 
+                        id="min-price-input"
+                        type="number"
+                        placeholder="Min price"
+                        value={minPrice}
+                        onChange={(e) => {
+                            onMinPriceChange(e.target.value);
+                        }}
+                        className="search-input"
+                        style={{ width: '48%' }}
+                    />
+                    <input 
+                        id="max-price-input"
+                        type="number"
+                        placeholder="Max price"
+                        value={maxPrice}
+                        onChange={(e) => {
+                            onMaxPriceChange(e.target.value);
+                        }}
+                        className="search-input"
+                        style={{ width: '48%' }}
+                    />
+                </div>
+            </div>
             
             {/* 
                 still to add -
                 
-                - Price Range (min/max inputs)
                 - Popular/Featured checkbox
                 - Brand filter
                 - etc.

@@ -35,6 +35,22 @@ class ProductController extends Controller
             $query->where('category', $category);
         }
 
+        // minimum price filter
+        // checks if the url has ?min_price and isnt empty
+        if ($request->has('min_price') && $request->get('min_price') != '') {
+            // retrieves the value 
+            $minPrice = $request->get('min_price');
+            // Only show products where price is greater than or equal to min_price
+            $query->where('price', '>=', $minPrice);
+        }
+
+        // maximum price filter
+        if ($request->has('max_price') && $request->get('max_price') != '') {
+            $maxPrice = $request->get('max_price');
+            // Only show products where price is less than or equal to max_price
+            $query->where('price', '<=', $maxPrice);
+        }
+
         // now execute the query with pagination 
         $products = $query->paginate($perPage);
         

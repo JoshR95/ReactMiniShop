@@ -9,6 +9,8 @@ const Products = () => {
     const [pagination, setPagination] = useState({ total: 0, per_page: 9, last_page: 1 }); // Store pagination metadata
     const [searchTerm, setSearchTerm] = useState(''); // Store what user types in search box
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [minPrice, setMinPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
     const itemsPerPage = 9; // Show 12 items per page
 
     // we use useEffect so this re-fetches when currentPage changes
@@ -30,6 +32,14 @@ const Products = () => {
                 if(selectedCategory){
                     // this appends the category to the url when the category is selected
                     url += `&category=${encodeURIComponent(selectedCategory)}`;
+                }
+                // if user entered a minimum price, add it to the URL
+                if (minPrice) {
+                    url += `&min_price=${encodeURIComponent(minPrice)}`;
+                }
+                // if user entered a maximum price, add it to the URL
+                if (maxPrice) {
+                    url += `&max_price=${encodeURIComponent(maxPrice)}`;
                 }
                 
                 console.log('Fetching from:', url);
@@ -62,7 +72,7 @@ const Products = () => {
 
         // running the above function (re-runs whenever currentPage OR searchTerm changes!)
         fetchProducts();
-    }, [currentPage, searchTerm, selectedCategory]); // Dependency array: re-fetch when currentPage OR searchTerm changes
+    }, [currentPage, searchTerm, selectedCategory, minPrice, maxPrice]); // Dependency array: re-fetch when currentPage OR searchTerm changes
 
     // Function to change pages - triggers new API call
     const paginate = (pageNumber) => {
@@ -76,10 +86,21 @@ const Products = () => {
         setCurrentPage(1); // Reset to page 1 when search changes
     };
 
+    // handler for category change in the filter section
     const handleCategoryChange = (newCategory) => {
         setSelectedCategory(newCategory);
         setCurrentPage(1); // Reset to page 1 when category changes
     };
+
+    // price filter handlers
+    const handleMinPriceChange = (newMinPrice) => {
+        setMinPrice(newMinPrice);
+        setCurrentPage(1);
+    }
+    const handleMaxPriceChange = (newMaxPrice) => {
+        setMaxPrice(newMaxPrice);
+        setCurrentPage(1);
+    }
 
     return (
         <div className="products-container">
@@ -123,6 +144,10 @@ const Products = () => {
                     onSearchChange={handleSearchChange}
                     selectedCategory={selectedCategory}
                     onCategoryChange={handleCategoryChange}
+                    minPrice={minPrice}
+                    onMinPriceChange={handleMinPriceChange}
+                    maxPrice={maxPrice}
+                    onMaxPriceChange={handleMaxPriceChange}
                 />
 
                 {/* RIGHT SIDE: Products and Pagination */}
